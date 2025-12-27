@@ -42,8 +42,8 @@ SELECT
  FROM
     high_demand_skills
 INNER JOIN high_salary_skills ON high_demand_skills.skill_id = high_salary_skills.skill_id
-HAVING
-    (count(skills_job_dim.job_id)) > 3
+WHERE
+    high_demand_skills.skills_demand > 3
 ORDER BY
     high_salary_skills.avg_salary_yearly DESC
 LIMIT
