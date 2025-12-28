@@ -5,7 +5,6 @@
 */
 
 SELECT	
-	job_postings_fact.job_id,
 	job_postings_fact.job_title_short,
     company_dim.name AS company_name,
 	job_postings_fact.salary_year_avg,
@@ -19,4 +18,4 @@ WHERE
     job_postings_fact.salary_year_avg IS NOT NULL
 ORDER BY
     job_postings_fact.salary_year_avg DESC
-LIMIT 100;
+LIMIT 50;
