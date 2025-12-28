@@ -6,10 +6,8 @@
 
 SELECT	
 	job_postings_fact.job_id,
-	job_postings_fact.job_title,
+	job_postings_fact.job_title_short,
     company_dim.name AS company_name,
-	job_postings_fact.job_location,
-	job_postings_fact.job_schedule_type,
 	job_postings_fact.salary_year_avg,
 	job_postings_fact.job_country
 FROM
