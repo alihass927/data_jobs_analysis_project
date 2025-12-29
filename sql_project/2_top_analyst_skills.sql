@@ -4,10 +4,10 @@
 3. This will provide a detialed look at which skills are required for top paying jobs.
 */
 
-WITH top_analyst_jobs AS (
+WITH top_analyst_skills AS (
     SELECT	
 	job_postings_fact.job_id,
-	job_postings_fact.job_title,
+	job_postings_fact.job_title_short,
     company_dim.name AS company_name,
 	job_postings_fact.salary_year_avg,
 	job_postings_fact.job_country
@@ -22,13 +22,12 @@ ORDER BY
     job_postings_fact.salary_year_avg DESC
 LIMIT 100
 )
-
 SELECT 
-    top_analyst_jobs.*,
+    top_analyst_skills.*,
     skills_dim.skills
 FROM 
-    top_analyst_jobs
-INNER JOIN skills_job_dim ON top_analyst_jobs.job_id = skills_job_dim.job_id
+    top_analyst_skills
+INNER JOIN skills_job_dim ON top_analyst_skills.job_id = skills_job_dim.job_id
 INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 ORDER BY
-    top_analyst_jobs.salary_year_avg DESC;
+    top_analyst_skills.salary_year_avg DESC;

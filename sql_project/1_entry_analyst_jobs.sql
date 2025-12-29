@@ -17,5 +17,5 @@ WHERE
     job_postings_fact.job_country = 'United States' AND 
     job_postings_fact.salary_year_avg IS NOT NULL
 ORDER BY
-    job_postings_fact.salary_year_avg DESC
+    job_postings_fact.salary_year_avg
 LIMIT 50;
