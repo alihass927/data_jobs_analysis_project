@@ -31,6 +31,15 @@ The data for this project was sourced from **Luke Barousse's SQL for Data Analyt
 * **Scope:** While the original dataset is global, I specifically filtered the data to focus on **United States job postings** to ensure localized accuracy for my career research.
 * **Data Quality:** The dataset was highly structured and reliable. However, I performed data cleaning to handle 
 * **null values** in the salary columns and job location fields to ensure my final averages were not skewed.
+
+## 📂 Project Structure
+- 📁 **[sql_project/](sql_project)**: Contains the 6 individual SQL files for each analysis question. 
+(Just changed the 'Data Analyst' to 'Business Analyst' in WHERE statement to get results for job titles.)
+- 📁 **[csv_data/](csv_data)**: The resulting data exports used for visualization.
+- 📁 **[visuals/](visuals)**: Screenshots and charts generated from the data.
+- 📄 **[README.md](README.md)**: Project documentation.
+
+---
 ---
 ## 🛠️ Tools I Used
 For this project, I combined industry-standard database management with modern developer workflows:
@@ -38,7 +47,7 @@ For this project, I combined industry-standard database management with modern d
 * **SQL:** The backbone of my analysis, allowing me to query the dataset and extract critical insights.
 * **PostgreSQL:** My chosen Database Management System (DBMS) for handling the large-scale job posting data.
 * **Visual Studio Code:** My primary code editor. I used the **PostgreSQL extension** to execute queries directly within my IDE for a faster workflow.
-* **Git & GitHub:** Essential for version control and sharing my SQL scripts, ensuring my project remains organized and reproducible.
-* **Excel / [Your Tool Here]:** Used for creating the data visualizations from my SQL CSV exports.
+* **Git & GitHub:** Essential for version control and sharing my SQL scripts.
+* **Gemini:** Used for creating the data visualizations from my SQL CSV exports.
 
 ---
