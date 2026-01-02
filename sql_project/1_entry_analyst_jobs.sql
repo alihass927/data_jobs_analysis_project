@@ -1,8 +1,4 @@
-/*
-1. find out what are the top paying data analyst jobs?
-2. handle the missing values.
-3. find out what companies are offering top paying jobs.
-*/
+
 
 SELECT	
 	job_postings_fact.job_title_short,
