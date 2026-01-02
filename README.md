@@ -87,7 +87,6 @@ ORDER BY
     job_postings_fact.salary_year_avg
 LIMIT 50;
 ```
-*By modifying the WHERE statement, reults can be extracted for both roles.*
 
 ---
 ### 🛠️ 2. Top 10 Required Skills
@@ -135,7 +134,6 @@ INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 ORDER BY
     top_analyst_skills.salary_year_avg ASC;
 ```
-*By modifying the WHERE statement, reults can be extracted for both roles.*
 
 ---
 ### 📈 3. Most Demanded Skills
@@ -151,3 +149,22 @@ I analyzed the total volume of job postings to identify the skills most frequent
 - **Modern Stack:** Python and Power BI are strong contenders for the #4 and #5 spots, showing that modern data stacks are becoming standard requirements for entry-level professionals.
 
 **The SQL Code**
+```sql
+SELECT 
+    skills,
+    count(skills_job_dim.job_id) AS skills_count
+FROM
+    job_postings_fact
+INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_postings_fact.job_title_short = 'Data Analyst' --change to 'Business Analyst' for BA results
+    AND job_postings_fact.job_country = 'United States'
+    AND job_postings_fact.job_work_from_home = '0'
+GROUP BY
+    skills_dim.skills
+ORDER BY
+    skills_count DESC
+LIMIT 10;
+```
+
