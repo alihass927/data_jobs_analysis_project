@@ -328,7 +328,7 @@ LIMIT
 ### 🤝 6. The "Common Ground"
 I identified the technical skills that overlap between both roles to find the core competencies shared by both data professionals. This "common ground" highlights the most versatile tools that allow for maximum flexibility when applying for either position.
 
-![Common_skills](visuals\data_an_assets\6_common.png)
+![Common_skills](visuals/data_an_assets/6_common.png)
 *Figure 11: Top Shared Skills by Total Job Postings (Source: 6_common_skills.csv)*
 
 **The insight**
