@@ -61,10 +61,10 @@ For each question below, you will find:
 ### 💰 1. Entry-Level Salary Trends
 To identify the starting point for these careers, I filtered the dataset for job postings in the United States and focused on the roles specifically mentioning "Data Analyst" and "Business Analyst."
 
-![Entry_jobs_D.An](visuals\data_an_assets\1_D.An.png)
+![Entry_jobs_D.An](visuals/data_an_assets/1_D.An.png)
 *Figure 1: Entry-Level Data Analyst Salary Distribution (Source: 1_entry_jobs D.An.csv)*
 
-![Entry_jobs_B.An](visuals\business_an_assets\1_B.An.png)
+![Entry_jobs_B.An](visuals/business_an_assets/1_B.An.png)
 *Figure 2: Entry-Level Business Analyst Salary Distribution (Source: 1_entry_jobs B.An.csv)*
 
 **The Insight**
