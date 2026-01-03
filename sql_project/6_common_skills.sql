@@ -1,8 +1,3 @@
-/*
-1. Find out top 10 most common skills among 'Data Analyst' and 'Business Analyst' roles.
-2. Group by skills
-*/
-
 WITH job_skills AS (
     SELECT 
     skills_dim.skills,

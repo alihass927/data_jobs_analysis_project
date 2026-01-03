@@ -54,7 +54,8 @@ For each question below, you will find:
 * **Visual Analysis:** Clear charts and tables to help you visualize the trends.
 * **Key Insights:** A "Bottom Line" summary of what the data actually means for a job seeker.
 * **The SQL Query:** The exact code used to pull the data, so you can reproduce these results yourself.
-
+---
+---
 
 
 ### 💰 1. Entry-Level Salary Trends
@@ -88,6 +89,7 @@ ORDER BY
 LIMIT 50;
 ```
 
+---
 ---
 ### 🛠️ 2. Top 10 Required Skills
 I identified the technical skills most frequently requested in job descriptions to determine the core toolkit for each role. This highlights the foundational skills entry-level candidates should focus on mastering.
@@ -136,6 +138,7 @@ ORDER BY
 ```
 
 ---
+---
 ### 📈 3. Most Demanded Skills
 I analyzed the total volume of job postings to identify the skills most frequently requested by employers. This reveals which tools provide the broadest range of career opportunities in the current market.
 
@@ -167,4 +170,208 @@ ORDER BY
     skills_count DESC
 LIMIT 10;
 ```
+
+---
+---
+
+### 💰 4. High-Paying Skills
+I examined the skills associated with highest average salaries to identify lucrative specializations. This reveals which technical expertise offers the greatest financial rewards for data professionals.
+
+![High_pay_skills_D.An](visuals\data_an_assets\4_D.An.png)
+*Figure 7: Top 10 High-Paying Skills for Data Analysts (Source: 4_high_pay_skills D.An.csv)*
+
+![High_pay_skills_B.An](visuals\business_an_assets\4_B.An.png)
+*Figure 8: Top 10 High-Paying Skills for Business Analysts (Source: 4_high_pay_skills B.An.csv)*
+
+**The insight**
+- **The Power of Specialization:** For Data Analysts, specialized R libraries like dplyr and programming languages like Solidity and Rust top the list, reaching average salaries of over $180,000.
+
+- **Big Data for Business:** For Business Analysts, skills in data orchestration and big data tools like Airflow, Spark, and Hadoop command the highest pay, with Airflow leading at nearly $196,000.
+
+- **High Barrier to Entry:** Notice that the skills on these lists are different from the "Most Demanded" list. While SQL and Excel get you the job, these specialized tools are what significantly increase your earning potential.
+
+**The SQL code**
+```sql
+SELECT 
+    skills,
+    round(avg(job_postings_fact.salary_year_avg), 2) AS avg_salary_yearly
+FROM
+    job_postings_fact
+INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_postings_fact.job_title_short = 'Data Analyst'  -- change this to 'Business Analyst' for BA results
+    AND job_postings_fact.job_country = 'United States'
+    AND job_postings_fact.job_work_from_home = '0' 
+    AND job_postings_fact.salary_year_avg IS NOT NULL
+GROUP BY
+    skills_dim.skills
+ORDER BY
+    avg_salary_yearly DESC
+LIMIT 10;
+
+```
+
+---
+---
+
+### 🎯 5. Optimal Skills 
+I cross-referenced skill demand with average salaries to pinpoint the most "optimal" skills for career growth. This analysis identifies the high-value technical competencies that offer both job security and premium compensation.
+
+*Optimal_skill_D.An*
+---
+
+
+| Skill         | Demand (Job Count) | Avg Salary (USD) |
+|:--------------|:------------------:|:-----------------|
+| cassandra     | 6                  | $148,931         |
+| notion        | 4                  | $133,125         |
+| perl          | 17                 | $132,119         |
+| kafka         | 20                 | $127,430         |
+| pytorch       | 12                 | $125,182         |
+| airflow       | 44                 | $122,718         |
+| pyspark       | 33                 | $120,569         |
+| elasticsearch | 6                  | $119,333         |
+| gcp           | 40                 | $119,049         |
+| tensorflow    | 16                 | $118,324         |
+
+*This table was created using Gemini (Source: 5_optimal_skills D.An.csv)*
+
+*Optimal_skills_B.An*
+---
+
+
+| Skill         | Demand (Job Count) | Avg Salary (USD) |
+|:--------------|:------------------:|:-----------------|
+| C             | 4                  | $162,275         |
+| Spark         | 5                  | $157,102         |
+| Hadoop        | 11                 | $154,858         |
+| Phoenix       | 14                 | $139,076         |
+| NoSQL         | 9                  | $128,028         |
+| Looker        | 19                 | $121,889         |
+| C++           | 4                  | $121,150         |
+| Snowflake     | 28                 | $118,952         |
+| BigQuery      | 7                  | $118,643         |
+| GCP           | 6                  | $118,358         |
+
+*This table was created using Gemini (Source: 5_optimal_skills B.An.csv)*
+
+**The insight**
+
+- **Strategic Learning:** The tables reveal that for Data Analysts, tools like Airflow and GCP are the "sweet spot"—they have significant demand (40+ postings) while maintaining a salary over $119k.
+
+- **Infrastructure Skills:** For Business Analysts, Snowflake is a standout choice with 28 mentions and a $118k+ average salary, making it a high-value skill to learn for those targeting higher-paying roles.
+
+- **Niche Pay:** While programming languages like C or Perl pay very well, their lower demand suggests they are more specialized paths compared to cloud platforms (GCP, Snowflake).
+
+**The SQL code**
+
+```sql
+
+WITH high_demand_skills AS (
+    SELECT 
+        skills_job_dim.skill_id,
+        job_postings_fact.job_title_short,
+        skills_dim.skills,
+        count(skills_job_dim.job_id) AS skills_demand
+    FROM
+        job_postings_fact
+    INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+    INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+    WHERE
+        job_postings_fact.job_title_short = 'Data Analyst'  -- Change this to 'Business Analyst' for BA results
+        AND job_postings_fact.job_country = 'United States'
+        AND job_postings_fact.salary_year_avg IS NOT NULL
+    GROUP BY
+        skills_job_dim.skill_id,
+        job_postings_fact.job_title_short,
+        skills_dim.skills
+) ,
+high_salary_skills AS (
+    SELECT 
+        skills_job_dim.skill_id,
+        skills_dim.skills,
+        round(avg(job_postings_fact.salary_year_avg), 2) AS avg_salary_yearly
+    FROM
+        job_postings_fact
+    INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+    INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+    WHERE
+        job_postings_fact.job_title_short = 'Data Analyst' -- Change this to 'Business Analyst' for BA results
+        AND job_postings_fact.job_country = 'United States'
+        AND job_postings_fact.salary_year_avg IS NOT NULL
+    GROUP BY
+        skills_job_dim.skill_id,
+        skills_dim.skills
+)
+SELECT
+    high_demand_skills.skill_id,
+    high_demand_skills.job_title_short,
+    high_demand_skills.skills,
+    high_demand_skills.skills_demand,
+    high_salary_skills.avg_salary_yearly
+ FROM
+    high_demand_skills
+INNER JOIN high_salary_skills ON high_demand_skills.skill_id = high_salary_skills.skill_id
+WHERE
+    high_demand_skills.skills_demand > 3
+ORDER BY
+    high_salary_skills.avg_salary_yearly DESC
+LIMIT
+10;
+```
+
+---
+---
+
+
+### 🤝 6. The "Common Ground"
+I identified the technical skills that overlap between both roles to find the core competencies shared by both data professionals. This "common ground" highlights the most versatile tools that allow for maximum flexibility when applying for either position.
+
+![Common_skills](visuals\data_an_assets\6_common.png)
+*Figure 11: Top Shared Skills by Total Job Postings (Source: 6_common_skills.csv)*
+
+**The insight**
+
+- **The "Versatility Foundation":** SQL, Excel, and Python are the top three shared skills. Mastering these three effectively makes you a strong candidate for both Data Analyst and Business Analyst positions.
+
+- **Unified Visuals:** Both roles rely heavily on Tableau and Power BI, proving that the ability to tell a story with data is a universal requirement in the business world.
+
+- **The Full Stack:** If you are unsure which path to take, focusing on the skills in this table provides the highest flexibility for your career.
+
+**The SQL code**
+
+```sql
+WITH job_skills AS (
+    SELECT 
+    skills_dim.skills,
+    job_postings_fact.job_title_short
+    FROM skills_dim
+    INNER JOIN skills_job_dim  ON skills_dim.skill_id = skills_job_dim.skill_id
+    INNER JOIN job_postings_fact  ON skills_job_dim.job_id = job_postings_fact.job_id
+    WHERE job_postings_fact.job_title_short IN ('Data Analyst', 'Business Analyst')
+)
+SELECT 
+    skills,
+    COUNT(DISTINCT job_title_short) AS roles_count,
+    COUNT(*) AS total_postings
+FROM job_skills
+GROUP BY skills
+HAVING COUNT(DISTINCT job_title_short) = 2
+ORDER BY total_postings DESC
+LIMIT 10;
+```
+
+---
+---
+
+
+## 🧠 What I Learned
+
+- **🧩 Complex Querying:** Learned advanced SQL techniques like CTEs and Subqueries.
+
+- **📊 Data Storytelling:** Learned how to translate raw numbers into meaningful charts that tell a story.
+
+- **💡 Strategic Thinking:** Discovered that high-paying skills aren't always the most demanded, requiring a balanced learning path.
+
 
