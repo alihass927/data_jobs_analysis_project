@@ -93,10 +93,10 @@ LIMIT 50;
 ---
 ### 🛠️ 2. Top 10 Required Skills
 I identified the technical skills most frequently requested in job descriptions to determine the core toolkit for each role. This highlights the foundational skills entry-level candidates should focus on mastering.
-![Entry_skills_D.An](visuals\data_an_assets\2_D.An_modify.png)
+![Entry_skills_D.An](visuals/data_an_assets/2_D.An_modify.png)
 *Figure 3: Top 10 Required Skills for Entry-Level Data Analysts (Source: 2_entry_skills_D.An.csv)*
 
-![Entry_skills_B.An](visuals\business_an_assets\2_B.An_modify.png)
+![Entry_skills_B.An](visuals/business_an_assets/2_B.An_modify.png)
 *Figure 4: Top 10 Required Skills for Entry-Level Business Analysts (Source: 2_entry_skills_B.An.csv)*
 
 **The Insight**
@@ -142,9 +142,9 @@ ORDER BY
 ### 📈 3. Most Demanded Skills
 I analyzed the total volume of job postings to identify the skills most frequently requested by employers. This reveals which tools provide the broadest range of career opportunities in the current market.
 
-![Demanded_skills_D.An](visuals\data_an_assets\3_D.An.png)
+![Demanded_skills_D.An](visuals/data_an_assets/3_D.An.png)
 *Figure 5: Most Demanded Skills for Data Analysts (Source: 3_demanded_skills D.An.csv)*
-![Demanded_skills_B.An](visuals\business_an_assets\3_B.An.png)
+![Demanded_skills_B.An](visuals/business_an_assets/3_B.An.png)
 *Figure 6: Most Demanded Skills for Business Analysts (Source: 3_demanded_skills B.An.csv)*
 
 **The Insight**
@@ -177,10 +177,10 @@ LIMIT 10;
 ### 💰 4. High-Paying Skills
 I examined the skills associated with highest average salaries to identify lucrative specializations. This reveals which technical expertise offers the greatest financial rewards for data professionals.
 
-![High_pay_skills_D.An](visuals\data_an_assets\4_D.An.png)
+![High_pay_skills_D.An](visuals/data_an_assets/4_D.An.png)
 *Figure 7: Top 10 High-Paying Skills for Data Analysts (Source: 4_high_pay_skills D.An.csv)*
 
-![High_pay_skills_B.An](visuals\business_an_assets\4_B.An.png)
+![High_pay_skills_B.An](visuals/business_an_assets/4_B.An.png)
 *Figure 8: Top 10 High-Paying Skills for Business Analysts (Source: 4_high_pay_skills B.An.csv)*
 
 **The insight**
